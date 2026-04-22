@@ -1,12 +1,487 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inboundtechnologies Corporate</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InboundTechnologies | 境界を超え、未来を実装する。</title>
+    <!-- Tailwind CSSの読み込み -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- 画面切り替えと独自デザイン用のCSS -->
+    <style>
+        body {
+            font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+            background-color: #FAFAFA;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* ガラスモーフィズム（透明感のあるヘッダー） */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* ページ切り替えの仕組み */
+        .page-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            padding-top: 80px; /* ヘッダーの高さ分 */
+            min-height: 100vh;
+        }
+        .page-section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ふわっと現れるアニメーション */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ナビゲーションリンクのアクティブ状態 */
+        .nav-link.active-nav {
+            color: #3498DB;
+            font-weight: 500;
+        }
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #3498DB;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after, .nav-link.active-nav::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="glass-header fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-widest text-slate-800 cursor-pointer" onclick="navigateTo('home')">
+                InboundTechnologies
+            </div>
+            <!-- PC Navigation -->
+            <nav class="hidden md:block">
+                <ul class="flex space-x-8 text-sm tracking-wider text-slate-600">
+                    <li><button onclick="navigateTo('home')" class="nav-link active-nav" data-target="home">HOME</button></li>
+                    <li><button onclick="navigateTo('about')" class="nav-link" data-target="about">ABOUT</button></li>
+                    <li><button onclick="navigateTo('service')" class="nav-link" data-target="service">SERVICE</button></li>
+                    <li><button onclick="navigateTo('recruit')" class="nav-link" data-target="recruit">RECRUIT</button></li>
+                </ul>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-slate-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+
+        <!-- ==================== HOME PAGE ==================== -->
+        <section id="home" class="page-section active">
+            <!-- Hero Area -->
+            <div class="relative h-[60vh] min-h-[400px] flex flex-col justify-center items-center text-center px-4 overflow-hidden">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+                <div class="absolute inset-0 bg-white/70 backdrop-blur-sm"></div>
+                
+                <div class="relative z-10">
+                    <h1 class="fade-up text-4xl md:text-6xl font-bold tracking-tight text-slate-900 mb-6">境界を超え、未来を実装する。</h1>
+                    <p class="fade-up text-slate-700 font-medium tracking-wider max-w-2xl leading-relaxed mx-auto" style="transition-delay: 0.2s;">
+                        テクノロジーの力で、あらゆる障壁をなくす。<br class="hidden md:block">圧倒的なスピードで、ビジネスの新しい常識を創り出す。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Philosophy -->
+            <div class="max-w-7xl mx-auto px-6 py-24">
+                <div class="text-center mb-16 fade-up">
+                    <h2 class="text-3xl font-light tracking-widest text-slate-800">PHILOSOPHY</h2>
+                    <span class="text-xs text-slate-400 tracking-widest mt-2 block">私たちの哲学</span>
+                </div>
+                <div class="max-w-3xl mx-auto text-center fade-up" style="transition-delay: 0.2s;">
+                    <p class="text-slate-600 leading-loose">
+                        テクノロジーの力で、ビジネスの境界をなくす。<br>
+                        InboundTechnologiesは、南青山から世界へ向けて革新的なソリューションを提供します。<br>
+                        私たちが追求するのは、本質的な課題解決と圧倒的なスピード。<br>
+                        常識に囚われないプロフェッショナル集団として、クライアントのビジネスを次の次元へと引き上げます。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Page Link Banners -->
+            <div class="max-w-7xl mx-auto px-6 pb-32 space-y-8">
+                
+                <!-- ABOUT Banner -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg h-64 md:h-80 cursor-pointer fade-up" onclick="navigateTo('about')">
+                    <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=1200" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="ABOUT US">
+                    <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-transparent"></div>
+                    <div class="relative z-10 h-full flex flex-col justify-center p-8 md:p-16 max-w-3xl">
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-wider">ABOUT US</h3>
+                        <p class="text-lg md:text-xl text-white/90 mb-6 font-light">限界を決めない。それが私たちの流儀</p>
+                        <span class="inline-flex items-center text-white font-medium tracking-wider group-hover:text-blue-400 transition-colors">
+                            詳細を見る
+                            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- SERVICE Banner -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg h-64 md:h-80 cursor-pointer fade-up" style="transition-delay: 0.1s;" onclick="navigateTo('service')">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="SERVICE">
+                    <div class="absolute inset-0 bg-gradient-to-l from-slate-900/90 via-slate-900/60 to-transparent md:hidden"></div>
+                    <div class="absolute inset-0 bg-gradient-to-l from-slate-900/90 via-slate-900/60 to-transparent hidden md:block"></div>
+                    <div class="relative z-10 h-full flex flex-col justify-center items-end text-right p-8 md:p-16 w-full">
+                        <div class="max-w-2xl">
+                            <h3 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-wider">SERVICE</h3>
+                            <p class="text-lg md:text-xl text-white/90 mb-6 font-light">ビジネスの成果に直結するソリューション</p>
+                            <span class="inline-flex items-center justify-end text-white font-medium tracking-wider group-hover:text-blue-400 transition-colors w-full">
+                                詳細を見る
+                                <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ======== 社内報 (JOURNAL) ======== -->
+                <div class="pt-16 fade-up">
+                    <div class="flex justify-between items-end mb-8 border-b border-slate-200 pb-4">
+                        <div>
+                            <h2 class="text-3xl font-light tracking-widest text-slate-800">JOURNAL</h2>
+                            <span class="text-xs text-slate-400 tracking-widest mt-1 block">社内報</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="group cursor-pointer">
+                            <div class="overflow-hidden rounded-xl mb-4 aspect-[4/3] shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="社内報1">
+                            </div>
+                            <div class="text-sm text-slate-400 mb-2">2026.04.15</div>
+                            <h3 class="text-slate-800 font-medium group-hover:text-blue-500 transition-colors line-clamp-2 leading-relaxed">南青山オフィスでの新しい働き方。コミュニケーションを加速させる空間作り</h3>
+                        </div>
+                        <div class="group cursor-pointer">
+                            <div class="overflow-hidden rounded-xl mb-4 aspect-[4/3] shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="社内報2">
+                            </div>
+                            <div class="text-sm text-slate-400 mb-2">2026.04.02</div>
+                            <h3 class="text-slate-800 font-medium group-hover:text-blue-500 transition-colors line-clamp-2 leading-relaxed">【メンバーインタビュー】未経験から最前線の営業コンサルタントへ。成長の秘訣とは？</h3>
+                        </div>
+                        <div class="group cursor-pointer">
+                            <div class="overflow-hidden rounded-xl mb-4 aspect-[4/3] shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="社内報3">
+                            </div>
+                            <div class="text-sm text-slate-400 mb-2">2026.03.20</div>
+                            <h3 class="text-slate-800 font-medium group-hover:text-blue-500 transition-colors line-clamp-2 leading-relaxed">月間アワード表彰式を開催。圧倒的な成果を出した今月のMVPは…！</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ======== お知らせ (NEWS) ======== -->
+                <div class="pt-16 fade-up">
+                    <div class="flex justify-between items-end mb-8 border-b border-slate-200 pb-4">
+                        <div>
+                            <h2 class="text-3xl font-light tracking-widest text-slate-800">NEWS</h2>
+                            <span class="text-xs text-slate-400 tracking-widest mt-1 block">お知らせ</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="group block border-b border-slate-100 pb-4 hover:bg-slate-50 transition-colors p-2 -mx-2 rounded cursor-pointer">
+                            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                                <div class="text-sm text-slate-400 w-24">2026.04.22</div>
+                                <div class="text-xs text-blue-500 border border-blue-500 px-2 py-0.5 rounded w-fit text-center">プレスリリース</div>
+                                <div class="text-slate-700 font-medium group-hover:text-blue-500 transition-colors">次世代型営業支援ツールのベータ版提供を開始しました。</div>
+                            </div>
+                        </div>
+                        <div class="group block border-b border-slate-100 pb-4 hover:bg-slate-50 transition-colors p-2 -mx-2 rounded cursor-pointer">
+                            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                                <div class="text-sm text-slate-400 w-24">2026.04.10</div>
+                                <div class="text-xs text-slate-500 border border-slate-400 px-2 py-0.5 rounded w-fit text-center">お知らせ</div>
+                                <div class="text-slate-700 font-medium group-hover:text-blue-500 transition-colors">ゴールデンウィーク期間中の営業に関するお知らせ</div>
+                            </div>
+                        </div>
+                        <div class="group block border-b border-slate-100 pb-4 hover:bg-slate-50 transition-colors p-2 -mx-2 rounded cursor-pointer">
+                            <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                                <div class="text-sm text-slate-400 w-24">2026.04.01</div>
+                                <div class="text-xs text-emerald-500 border border-emerald-500 px-2 py-0.5 rounded w-fit text-center">採用情報</div>
+                                <div class="text-slate-700 font-medium group-hover:text-blue-500 transition-colors">2027年度 新卒採用のエントリー受付を開始しました。</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== ABOUT PAGE ==================== -->
+        <section id="about" class="page-section">
+            <div class="max-w-7xl mx-auto px-6 py-24">
+                <div class="text-center mb-20 fade-up">
+                    <h2 class="text-3xl font-light tracking-widest text-slate-800">ABOUT US</h2>
+                    <span class="text-xs text-slate-400 tracking-widest mt-2 block">私たちについて</span>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-12 items-center mb-24">
+                    <div class="w-full md:w-1/2 fade-up">
+                        <div class="bg-slate-200 aspect-square rounded-2xl flex items-center justify-center overflow-hidden shadow-lg">
+                            <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=800" alt="代表イメージ" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 fade-up" style="transition-delay: 0.2s;">
+                        <h3 class="text-2xl font-bold mb-6 text-slate-800">「限界を決めない。それが私たちの流儀」</h3>
+                        <p class="text-slate-600 leading-loose mb-6">
+                            IT技術と強力な推進力。この両輪を高い次元で融合させることで、企業が抱える課題の多くは美しく解決できます。私たちは南青山を拠点とし、常に視座を高く持ち、最先端のソリューションを提供し続けます。
+                        </p>
+                        <p class="font-bold text-slate-800 tracking-wider">代表取締役　森 勝繁</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-10 rounded-2xl shadow-sm fade-up">
+                    <h3 class="text-xl font-light mb-4 text-center">Company Profile</h3>
+                    <div class="max-w-2xl mx-auto">
+                        <div class="flex border-b border-slate-100 py-4">
+                            <div class="w-1/3 text-slate-500">社名</div>
+                            <div class="w-2/3 text-slate-800 font-medium">InboundTechnologies</div>
+                        </div>
+                        <div class="flex border-b border-slate-100 py-4">
+                            <div class="w-1/3 text-slate-500">代表者</div>
+                            <div class="w-2/3 text-slate-800">代表取締役　森 勝繁</div>
+                        </div>
+                        <div class="flex border-b border-slate-100 py-4">
+                            <div class="w-1/3 text-slate-500">所在地</div>
+                            <div class="w-2/3 text-slate-800">東京都港区南青山7-1-7 C-CUBE南青山4F</div>
+                        </div>
+                        <div class="flex py-4">
+                            <div class="w-1/3 text-slate-500">事業内容</div>
+                            <div class="w-2/3 text-slate-800">Web制作 / ITエンジニアリング / BPO事業 / 営業コンサルティング</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SERVICE PAGE ==================== -->
+        <section id="service" class="page-section">
+            <div class="max-w-7xl mx-auto px-6 py-24">
+                <div class="text-center mb-20 fade-up">
+                    <h2 class="text-3xl font-light tracking-widest text-slate-800">SERVICE</h2>
+                    <span class="text-xs text-slate-400 tracking-widest mt-2 block">事業内容</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Service 1 -->
+                    <div class="relative group overflow-hidden rounded-2xl shadow-lg h-80 fade-up">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&q=80&w=600" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Web制作事業">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 p-8 flex flex-col justify-end">
+                            <h3 class="text-2xl font-bold text-white mb-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Web制作事業</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                                企業のブランド価値を最大化する、クリーンでモダンなWebサイトを制作。見た目の美しさだけでなく、ビジネスの成果に直結するUI/UX設計を強みとしています。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Service 2 -->
+                    <div class="relative group overflow-hidden rounded-2xl shadow-lg h-80 fade-up" style="transition-delay: 0.1s;">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=600" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="ITエンジニア">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 p-8 flex flex-col justify-end">
+                            <h3 class="text-2xl font-bold text-white mb-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">ITエンジニア</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                                最新技術を用いたシステム開発。要件定義の段階から運用保守まで、プロフェッショナルなエンジニア集団がクライアントと伴走し、最適なシステムを構築します。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="relative group overflow-hidden rounded-2xl shadow-lg h-80 fade-up" style="transition-delay: 0.2s;">
+                        <img src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=600" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="BPO事業">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 p-8 flex flex-col justify-end">
+                            <h3 class="text-2xl font-bold text-white mb-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">BPO事業</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                                バックオフィス業務やSNS運用など、企業の中枢を支える業務をスマートに代行。お客様が本来のコアビジネスに集中できる環境を提供します。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Service 4 -->
+                    <div class="relative group overflow-hidden rounded-2xl shadow-lg h-80 fade-up" style="transition-delay: 0.3s;">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=600" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="営業コンサルティング">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 p-8 flex flex-col justify-end">
+                            <h3 class="text-2xl font-bold text-white mb-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">営業コンサルティング</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                                属人化しがちな営業活動を分解し、論理的で洗練されたプロセスへと再構築。コンサルタントが企業の売上向上と組織力の引き上げを支援します。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== RECRUIT PAGE ==================== -->
+        <section id="recruit" class="page-section">
+            <div class="max-w-7xl mx-auto px-6 py-24">
+                <div class="text-center mb-20 fade-up">
+                    <h2 class="text-3xl font-light tracking-widest text-slate-800">RECRUIT</h2>
+                    <span class="text-xs text-slate-400 tracking-widest mt-2 block">採用情報</span>
+                </div>
+
+                <div class="bg-slate-800 text-white rounded-3xl p-12 md:p-20 text-center fade-up relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h3 class="text-3xl md:text-4xl font-bold tracking-wider mb-8">未経験から、<br class="md:hidden">圧倒的なプロへ。</h3>
+                        <p class="text-slate-300 leading-relaxed max-w-2xl mx-auto mb-12">
+                            InboundTechnologiesが求めるのは、現状に満足しない向上心。<br>
+                            無駄な慣習を排除し、純粋に「最高の成果」を追求する環境がここにあります。<br><br>
+                            未経験の領域でも、洗練された環境と熱量があれば一気に成長できる。<br>
+                            私たちと一緒に、次の「当たり前」を創りませんか？
+                        </p>
+                        <a href="#" class="inline-block bg-white text-slate-800 px-10 py-4 rounded-full font-bold tracking-widest hover:bg-slate-200 transition-colors duration-300 shadow-lg">
+                            ENTRY
+                        </a>
+                    </div>
+                    <!-- 装飾の円 -->
+                    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-white opacity-5"></div>
+                    <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-blue-500 opacity-10"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
+                <!-- 左側：会社情報 -->
+                <div class="md:col-span-5">
+                    <div class="text-2xl font-bold tracking-widest text-white mb-6">
+                        InboundTechnologies
+                    </div>
+                    <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+                        境界を超え、未来を実装する。<br>
+                        テクノロジーと圧倒的なスピードで、ビジネスの新しい常識を創り出します。
+                    </p>
+                    <div class="space-y-1 text-sm text-slate-400">
+                        <p>株式会社InboundTechnologies</p>
+                        <p>〒107-0062 東京都港区南青山7-1-7 C-CUBE南青山4F</p>
+                    </div>
+                </div>
+
+                <!-- 中央：サイトマップ -->
+                <div class="md:col-span-3">
+                    <h4 class="text-white font-medium tracking-widest mb-6">SITEMAP</h4>
+                    <ul class="space-y-3 text-sm text-slate-400 tracking-wider">
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="navigateTo('home')">HOME - トップ</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="navigateTo('about')">ABOUT US - 私たちについて</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="navigateTo('service')">SERVICE - 事業内容</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="navigateTo('recruit')">RECRUIT - 採用情報</a></li>
+                    </ul>
+                </div>
+
+                <!-- 右側：コンタクト -->
+                <div class="md:col-span-4 flex flex-col justify-center space-y-4">
+                    <a href="#" onclick="navigateTo('recruit')" class="block w-full bg-blue-600 hover:bg-blue-700 text-white py-4 px-6 rounded-md text-center font-medium tracking-widest transition-colors shadow-lg">
+                        採用エントリー
+                    </a>
+                    <a href="#" class="block w-full border border-slate-600 hover:border-white hover:text-white text-slate-300 py-4 px-6 rounded-md text-center font-medium tracking-widest transition-colors">
+                        お問い合わせ
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ボトム情報 -->
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 tracking-wider">
+                <p>&copy; 2026 InboundTechnologies. All Rights Reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-6">
+                    <a href="#" class="hover:text-slate-300 transition-colors">プライバシーポリシー</a>
+                    <a href="#" class="hover:text-slate-300 transition-colors">情報セキュリティ基本方針</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ページナビゲーション機能
+        function navigateTo(pageId) {
+            // ページ上部へスクロール
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // 全セクションを非表示にする
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // 選択されたセクションを表示する
+            const targetSection = document.getElementById(pageId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                // 表示されたセクション内のアニメーションを再トリガー
+                setTimeout(() => checkFade(), 100);
+            }
+
+            // ナビゲーションのアクティブ状態を更新
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.getAttribute('data-target') === pageId) {
+                    link.classList.add('active-nav');
+                } else {
+                    link.classList.remove('active-nav');
+                }
+            });
+        }
+
+        // スクロール時のふわっと表示アニメーション
+        function checkFade() {
+            const elements = document.querySelectorAll('.fade-up');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(el => {
+                const positionFromTop = el.getBoundingClientRect().top;
+                // 画面の80%の位置に来たら表示
+                if (positionFromTop - windowHeight + 100 <= 0) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        // ヘッダーのスクロール時のスタイル変更
+        function checkHeader() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-sm');
+                header.style.background = 'rgba(255, 255, 255, 0.9)';
+            } else {
+                header.classList.remove('shadow-sm');
+                header.style.background = 'rgba(255, 255, 255, 0.7)';
+            }
+        }
+
+        // イベントリスナーの登録
+        window.addEventListener('scroll', () => {
+            checkFade();
+            checkHeader();
+        });
+        
+        // 初期読み込み時の実行
+        document.addEventListener('DOMContentLoaded', () => {
+            checkFade();
+        });
+    </script>
+</body>
 </html>
